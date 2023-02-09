@@ -32,7 +32,7 @@ def lambda_handler(event, context):
 
     msg_body=''
     if status == 'InService':           
-        url_template_sucess = f'https://{api_id}.execute-api.us-east-1.amazonaws.com/v1/invokeSagemakerAPI?sagemaker_endpoint={sagemaker_endpoint}'
+        url_template_sucess = f'https://{api_id}.execute-api.us-east-2.amazonaws.com/v1/invokeSagemakerAPI?sagemaker_endpoint={sagemaker_endpoint}'
         msg_body = f'''
             API Sagemaker Inference Endpoint: {url_template_sucess}            
         '''

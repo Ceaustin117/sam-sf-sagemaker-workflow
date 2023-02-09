@@ -37,6 +37,8 @@ Resources:
       CodeUri: ../functions/create_and_email_accept_reject_links/
       Handler: app.lambda_handler
       Runtime: python3.8
+      Tags: 
+          Project: DFPoc
       Policies:
       - SNSPublishMessagePolicy:
           TopicName: SNSApprovalEmail      
@@ -50,6 +52,8 @@ Resources:
       CodeUri: ../functions/update_sagemakerEndpoint_API/
       Handler: app.lambda_handler
       Runtime: python3.8
+      Tags: 
+          Project: DFPoc
       Timeout: 600
       Policies:
       - SNSPublishMessagePolicy:
@@ -77,6 +81,8 @@ Resources:
       CodeUri: ../functions/respond_to_links/
       Handler: app.lambda_handler
       Runtime: python3.8
+      Tags: 
+          Project: DFPoc
       Policies:
       - Version: '2012-10-17'
         Statement:
@@ -102,6 +108,8 @@ Resources:
       CodeUri: ../functions/api_sagemaker_endpoint/
       Handler: app.lambda_handler
       Runtime: python3.8
+      Tags: 
+          Project: DFPoc
       Policies:
         - Version: '2012-10-17' # Policy Document
           Statement:
@@ -119,6 +127,9 @@ Resources:
   SageMakerRole:
       Type: AWS::IAM::Role
       Properties:       
+        Tags: 
+          - Key: "Project"
+            Value: "DFPoc"
         AssumeRolePolicyDocument: 
           Version: '2012-10-17'
           Statement:
@@ -144,6 +155,7 @@ Resources:
                         {
                               "Effect": "Allow",
                               "Action": [
+                                  "sagemaker:AddTags",
                                   "cloudwatch:PutMetricData",                                  
                                   "logs:CreateLogGroup",
                                   "logs:CreateLogStream",
@@ -201,6 +213,9 @@ Resources:
   StepFunctionsRole:
       Type: AWS::IAM::Role
       Properties:       
+        Tags: 
+          - Key: "Project"
+            Value: "DFPoc"
         AssumeRolePolicyDocument: 
           Version: '2012-10-17'
           Statement:
@@ -237,6 +252,7 @@ Resources:
                           {
                             "Effect": "Allow",
                             "Action": [
+                              "sagemaker:AddTags",
                               "sagemaker:CreateTrainingJob",
                               "sagemaker:DescribeTrainingJob",
                               "sagemaker:StopTrainingJob",
@@ -256,6 +272,7 @@ Resources:
                           {
                             "Effect": "Allow",
                             "Action": [
+                              "sagemaker:AddTags",
                               "sagemaker:ListTags"
                             ],
                             "Resource": [
